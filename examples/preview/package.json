@@ -1,0 +1,24 @@
+{
+  "name": "@korhq/unpreview-flat-example",
+  "type": "module",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "fix": "biome check --write .",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.0.4",
+    "@astrojs/svelte": "^7.0.3",
+    "@astrojs/tailwind": "^5.1.4",
+    "@korhq/unpreview": "workspace:*",
+    "@zag-js/svelte": "^0.81.0",
+    "@zag-js/switch": "^0.81.0",
+    "astro": "^5.1.4",
+    "svelte": "^5.17.3",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3"
+  }
+}

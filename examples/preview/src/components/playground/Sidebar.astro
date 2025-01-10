@@ -1,0 +1,11 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+
+const stories = await getCollection("stories");
+type storyType = CollectionEntry<"stories">;
+---
+
+<div class="p-4 rounded-md bg-slate-900 flex flex-col gap-3 w-1/5 h-full">
+    {stories.map((story: storyType) => <div>{story.data.title}</div>)}
+</div>

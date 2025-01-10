@@ -1,9 +1,14 @@
 ---
+import Sidebar from "../components/playground/Sidebar.astro";
+import Playground from "../pages/playground.astro";
+import Inspector from "../components/playground/Inspector.astro";
 import Layout from "./Layout.astro";
 ---
 
-<Layout
-  ><div class="flex gap-32">
-    <slot />
-  </div>
+<Layout>
+    <div class="flex gap-32 h-screen">
+        <Sidebar />
+        <Playground><slot /></Playground>
+        <Inspector />
+    </div>
 </Layout>

@@ -4,7 +4,7 @@
   "description": "un",
   "scripts": {
     "site": "turbo run --filter=@korhq/unwebsite",
-    "example:unpreview": "turbo run --filter=@korhq/unpreview-flat-example",
+    "example:preview": "turbo run --filter=@korhq/unpreview-flat-example",
     "fix": "turbo run fix"
   },
   "packageManager": "pnpm@9.12.3",

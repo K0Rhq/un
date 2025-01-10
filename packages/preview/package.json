@@ -1,0 +1,13 @@
+{
+	"name": "@korhq/unpreview",
+	"version": "0.1.0",
+	"description": "Preview your components and UI docs via stories made in MDX, inside an Astro component playground that you own.",
+	"homepage": "https://github.com/K0Rhq/un#readme",
+	"type": "module",
+	"scripts": {
+		"fix": "biome check --write ."
+	},
+	"keywords": [],
+	"author": "dukc",
+	"license": "Apache-2.0"
+}

@@ -1,0 +1,25 @@
+---
+import { getCollection, render } from "astro:content";
+import PlaygroundLayout from "@/layouts/PlaygroundLayout.astro";
+import type { CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const stories = await getCollection("stories");
+  return stories.map((story) => ({
+    params: { id: story.id },
+    props: { story },
+  }));
+}
+
+interface Props {
+  story: CollectionEntry<"stories">;
+}
+
+const { story } = Astro.props;
+const { Content } = await render(story);
+---
+
+<PlaygroundLayout>
+  <h1>{story.data.title}</h1>
+  <Content />
+</PlaygroundLayout>

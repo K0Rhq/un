@@ -13,7 +13,7 @@
   <input {...api.getHiddenInputProps()} />
   <span class="bg-red-400 h-4 w-8 flex" {...api.getControlProps()}>
     <span
-      class={` size-4 flex ${api.checked ? "bg-blue-400" : "bg-red-400"}`}
+      class={`size-4 flex ${api.checked ? "bg-blue-400" : "bg-red-400"}`}
       {...api.getThumbProps()}
     ></span>
   </span>

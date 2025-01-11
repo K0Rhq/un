@@ -1,5 +1,5 @@
 {
-  "name": "@korhq/unpreview-flat-example",
+  "name": "@korhq/unpreview-example",
   "type": "module",
   "version": "0.0.0",
   "scripts": {
@@ -10,13 +10,14 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.0.4",
+    "@astrojs/mdx": "^4.0.5",
     "@astrojs/svelte": "^7.0.3",
     "@astrojs/tailwind": "^5.1.4",
     "@korhq/unpreview": "workspace:*",
-    "@zag-js/svelte": "^0.81.0",
-    "@zag-js/switch": "^0.81.0",
-    "astro": "^5.1.4",
+    "@zag-js/pin-input": "^0.81.1",
+    "@zag-js/svelte": "^0.81.1",
+    "@zag-js/switch": "^0.81.1",
+    "astro": "^5.1.5",
     "svelte": "^5.17.3",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.3"

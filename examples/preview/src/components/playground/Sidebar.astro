@@ -6,6 +6,18 @@ const stories = await getCollection("stories");
 type storyType = CollectionEntry<"stories">;
 ---
 
-<div class="p-4 rounded-md bg-slate-900 flex flex-col gap-3 w-1/5 h-full">
-    {stories.map((story: storyType) => <div>{story.data.title}</div>)}
+<div
+  class="p-4 rounded-md bg-neutral-900 flex flex-col gap-3 col-span-1 h-full"
+>
+  <a href="/">back</a>
+  {
+    stories.map((story: storyType) => (
+      <a
+        href={`/playground/${story.id}`}
+        class={`text-lg ${Astro.url.pathname === `/playground/${story.id}` && "text-blue-400"}`}
+      >
+        {story.data.title}
+      </a>
+    ))
+  }
 </div>

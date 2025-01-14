@@ -1,0 +1,40 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type previewType = CollectionEntry<"previews">;
+
+interface Props {
+	items: previewType[];
+}
+
+const { items } = Astro.props;
+---
+
+{
+  items.map((item) => {
+    if (item.data.directory) {
+      const baseId = item.id;
+      const children: previewType[] = items.filter(
+        (child) => child.id.startsWith(baseId + "/") && child.id !== baseId
+      );
+
+      return (
+        <details open>
+          <summary class="text-lg capitalize">{item.data.title}</summary>
+          <div class="flex flex-col gap-2 pl-6 pt-2">
+            <Astro.self items={children} />
+          </div>
+        </details>
+      );
+    } else return (
+        <a
+          href={`/playground/${item.id}`}
+          class={`text-lg ${
+            Astro.url.pathname === `/playground/${item.id}` && "text-blue-400"
+          }`}
+        >
+          {item.data.title}
+        </a>
+      );
+  })
+}

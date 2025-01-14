@@ -2,9 +2,9 @@
 import { normalizeProps, useMachine } from "@zag-js/svelte";
 import * as zagSwitch from "@zag-js/switch";
 
-const [snapshot, send] = useMachine(
-	zagSwitch.machine({ id: "1", name: "switch" }),
-);
+const { id = "1", name = "switch", ...rest }: zagSwitch.Service = $props();
+
+const [snapshot, send] = useMachine(zagSwitch.machine({ id, name, ...rest }));
 
 const api = $derived(zagSwitch.connect(snapshot, send, normalizeProps));
 </script>
@@ -16,7 +16,7 @@ const api = $derived(zagSwitch.connect(snapshot, send, normalizeProps));
     {...api.getControlProps()}
   >
     <span
-      class={`size-5 self-center rounded-full flex duration-150 ${api.checked ? "bg-green-500 translate-x-[18px]" : "bg-red-500"}`}
+      class={`size-5 self-center rounded-full flex duration-150 ${api.checked ? "bg-sky-500 translate-x-[18px]" : "bg-neutral-500"}`}
       {...api.getThumbProps()}
     ></span>
   </span>

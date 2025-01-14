@@ -5,8 +5,8 @@
   const button = cva("px-4 py-2 flex items-center justify-center gap-2", {
     variants: {
       variant: {
-        primary: "bg-green-800",
-        secondary: "bg-red-800",
+        primary: "bg-sky-800",
+        secondary: "bg-neutral-800",
       },
     },
   });

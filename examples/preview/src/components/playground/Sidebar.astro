@@ -2,8 +2,8 @@
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 
-const stories = await getCollection("stories");
-type storyType = CollectionEntry<"stories">;
+const previews = await getCollection("previews");
+type previewType = CollectionEntry<"previews">;
 ---
 
 <div
@@ -11,12 +11,12 @@ type storyType = CollectionEntry<"stories">;
 >
   <a href="/">back</a>
   {
-    stories.map((story: storyType) => (
+    previews.map((preview: previewType) => (
       <a
-        href={`/playground/${story.id}`}
-        class={`text-lg ${Astro.url.pathname === `/playground/${story.id}` && "text-blue-400"}`}
+        href={`/playground/${preview.id}`}
+        class={`text-lg ${Astro.url.pathname === `/playground/${preview.id}` && "text-blue-400"}`}
       >
-        {story.data.title}
+        {preview.data.title}
       </a>
     ))
   }

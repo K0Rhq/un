@@ -10,7 +10,7 @@ Prebuilt, unstyled component files built with Zag, that you can easily drop in. 
 
 # unPreview
 
-Preview your components and UI docs via stories made in MDX, inside an Astro component playground that you own. Supports any UI framework. Style it with your own brand and layout. Integrate within your current website or docs.
+Preview your components and UI docs via previews made in MDX, inside an Astro component playground that you own. Supports any UI framework. Style it with your own brand and layout. Integrate within your current website or docs.
 
 # unDocs
 

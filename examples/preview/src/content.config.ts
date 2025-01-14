@@ -1,10 +1,10 @@
 import { defineCollection } from "astro:content";
-import { StorySchema } from "@korhq/unpreview";
+import { PreviewSchema } from "@korhq/unpreview";
 import { glob } from "astro/loaders";
 
-const stories = defineCollection({
-	loader: glob({ pattern: "**/*.mdx", base: "./src/stories" }),
-	schema: StorySchema,
+const previews = defineCollection({
+	loader: glob({ pattern: "**/*.mdx", base: "./src/previews" }),
+	schema: PreviewSchema,
 });
 
-export const collections = { stories };
+export const collections = { previews };

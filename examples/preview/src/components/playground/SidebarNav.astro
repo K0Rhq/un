@@ -1,40 +1,43 @@
 ---
 import type { CollectionEntry } from "astro:content";
-
-type previewType = CollectionEntry<"previews">;
-
+type PreviewType = CollectionEntry<"previews">;
 interface Props {
-	items: previewType[];
+  items: PreviewType[];
+  parentId?: string;
 }
+const { items, parentId } = Astro.props;
 
-const { items } = Astro.props;
+// Only filter at the top level
+const currentLevelItems = parentId
+  ? items.filter(
+      (item) =>
+        item.id.startsWith(`${parentId}/`) &&
+        item.id.split("/").length === parentId.split("/").length + 1,
+    )
+  : items.filter((item) => !item.id.includes("/"));
 ---
 
 {
-  items.map((item) => {
+  currentLevelItems.map((item) => {
     if (item.data.directory) {
-      const baseId = item.id;
-      const children: previewType[] = items.filter(
-        (child) => child.id.startsWith(baseId + "/") && child.id !== baseId
-      );
-
       return (
         <details open>
           <summary class="text-lg capitalize">{item.data.title}</summary>
           <div class="flex flex-col gap-2 pl-6 pt-2">
-            <Astro.self items={children} />
+            <Astro.self items={items} parentId={item.id} />
           </div>
         </details>
       );
-    } else return (
-        <a
-          href={`/playground/${item.id}`}
-          class={`text-lg ${
-            Astro.url.pathname === `/playground/${item.id}` && "text-blue-400"
-          }`}
-        >
-          {item.data.title}
-        </a>
-      );
+    }
+    return (
+      <a
+        href={`/playground/${item.id}`}
+        class={`text-lg ${
+          Astro.url.pathname === `/playground/${item.id}` && "text-blue-400"
+        }`}
+      >
+        {item.data.title}
+      </a>
+    );
   })
 }

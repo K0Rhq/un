@@ -8,7 +8,11 @@ const previews = await getCollection("previews");
 <div
   class="p-4 rounded-md bg-neutral-900 flex flex-col gap-3 col-span-1 h-full"
 >
-  <a href="/">back</a>
-  
+  <a
+    href="/"
+    class="text-3xl bg-gradient-to-r from-orange-200 via-teal-400 to-blue-500 inline-block text-transparent bg-clip-text hover:font-bold transition-all duration-150"
+    >unPreview</a
+  >
+  <hr class="border-neutral-700" />
   <SidebarNav items={previews} />
 </div>

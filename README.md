@@ -8,9 +8,9 @@ Build and preview your components & documentation actually with your own design.
 
 ## Codebase
 
-`packages/preview` unPreview components and templates
-`apps/cli` unCLI for initing un projects
-`apps/website` our website
+- `packages/preview` unPreview components and templates
+- `apps/cli` unCLI for initing un projects
+- `apps/website` our website
 
 ### Commands
 

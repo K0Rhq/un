@@ -4,6 +4,7 @@
   "description": "un",
   "scripts": {
     "site": "turbo run --filter=@korhq/unwebsite",
+    "cli": "turbo run --filter=un",
     "example:preview": "turbo run --filter=@korhq/unpreview-example",
     "fix": "turbo run fix"
   },

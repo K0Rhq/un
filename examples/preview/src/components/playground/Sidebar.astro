@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import SidebarNav from "./SidebarNav.astro";
+import SidebarTree from "./SidebarTree.astro";
 
 const previews = await getCollection("previews");
 ---
@@ -10,9 +10,9 @@ const previews = await getCollection("previews");
 >
   <a
     href="/"
-    class="text-3xl bg-gradient-to-r from-orange-200 via-teal-400 to-blue-500 inline-block text-transparent bg-clip-text hover:font-bold transition-all duration-150"
+    class="text-3xl bg-gradient-to-r from-orange-400 to-red-600 inline-block text-transparent bg-clip-text hover:font-bold transition-all duration-150 ease-out"
     >unPreview</a
   >
   <hr class="border-neutral-700" />
-  <SidebarNav items={previews} />
+  <SidebarTree items={previews} />
 </div>

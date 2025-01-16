@@ -1,8 +1,26 @@
+![un Banner](/.github/github.png)
+
 # un
+
+### In early alpha development stage
 
 Build and preview your components & documentation actually with your own design. Give your project design more love with un.
 
-#### In development - early alpha
+## Codebase
+
+`packages/preview` unPreview components and templates
+`apps/cli` unCLI for initing un projects
+`apps/website` our website
+
+### Commands
+
+```bash
+pnpm example:preview dev # testing/example environment for unPreview
+pnpm cli dev # the cli
+pnpm site dev # website
+
+pnpm fix # run biome/rustfmt/clippy tasks
+```
 
 # unUI
 

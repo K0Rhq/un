@@ -1,0 +1,10 @@
+{
+  "name": "un",
+  "license": "MIT-0",
+  "description": "CLI for un projects",
+  "scripts": {
+    "dev": "cargo run",
+    "build": "cargo build --release",
+    "fix": "cargo fmt && cargo clippy --fix --allow-dirty"
+  }
+}

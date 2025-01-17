@@ -31,6 +31,6 @@ const { Content } = await render(preview);
       <Content {...preview.data.props} />
       {JSON.stringify(preview.data.props)}
     </Playground>
-    <Inspector />
+    <Inspector componentProps={preview.data.props} />
   </div>
 </Layout>

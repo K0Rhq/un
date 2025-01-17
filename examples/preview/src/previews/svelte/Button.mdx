@@ -1,7 +1,12 @@
 ---
 title: "Button"
 props:
- variant: "secondary"
+ variant:
+  value: "secondary"
+  type: union
+  options:
+    - "primary"
+    - "secondary"
 ---
 
 import Button from "@/components/ui/Button.svelte"

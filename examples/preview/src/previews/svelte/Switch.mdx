@@ -1,7 +1,9 @@
 ---
 title: "Switch"
+props:
+  disabled: false
 ---
 
 import Switch from "@/components/ui/Switch.svelte"
 
-<Switch client:load disabled={false} onCheckedChange={(e) => {console.log(e.checked)}} />
+<Switch client:load {...props} />

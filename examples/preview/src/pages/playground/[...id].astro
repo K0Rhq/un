@@ -28,7 +28,8 @@ const { Content } = await render(preview);
     <Sidebar />
     <Playground>
       <h1 class="text-2xl">{preview.data.title}</h1>
-      <Content />
+      <Content {...preview.data.props} />
+      {JSON.stringify(preview.data.props)}
     </Playground>
     <Inspector />
   </div>

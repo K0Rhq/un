@@ -1,25 +1,35 @@
 ---
+import Inspector from "@/components/playground/Inspector.astro";
+import Playground from "@/components/playground/Playground.astro";
+import Sidebar from "@/components/playground/Sidebar.astro";
+import Layout from "@/layouts/Layout.astro";
+
 import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
-import PlaygroundLayout from "@/layouts/PlaygroundLayout.astro";
 
 export async function getStaticPaths() {
-	const previews = await getCollection("previews");
-	return previews.map((preview) => ({
-		params: { id: preview.id },
-		props: { preview },
-	}));
+  const previews = await getCollection("previews");
+  return previews.map((preview) => ({
+    params: { id: preview.id },
+    props: { preview },
+  }));
 }
 
 interface Props {
-	preview: CollectionEntry<"previews">;
+  preview: CollectionEntry<"previews">;
 }
 
 const { preview } = Astro.props;
 const { Content } = await render(preview);
 ---
 
-<PlaygroundLayout>
-  <h1 class="text-2xl">{preview.data.title}</h1>
-  <Content />
-</PlaygroundLayout>
+<Layout>
+  <div class="grid-cols-5 grid gap-4 h-full">
+    <Sidebar />
+    <Playground>
+      <h1 class="text-2xl">{preview.data.title}</h1>
+      <Content />
+    </Playground>
+    <Inspector />
+  </div>
+</Layout>

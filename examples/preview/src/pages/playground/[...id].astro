@@ -8,38 +8,38 @@ import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
-    const previews = await getCollection("previews");
-    return previews.map((preview) => ({
-        params: { id: preview.id },
-        props: { preview },
-    }));
+  const previews = await getCollection("previews");
+  return previews.map((preview) => ({
+    params: { id: preview.id },
+    props: { preview },
+  }));
 }
 
 interface Props {
-    preview: CollectionEntry<"previews">;
+  preview: CollectionEntry<"previews">;
 }
 
 const { preview } = Astro.props;
 const { Content } = await render(preview);
 
-const transformedProps = Object.entries(preview.data.props).reduce(
-    (acc, [key, prop]) => {
-        acc[key] = prop.value;
-        return acc;
-    },
-    // biome-ignore lint: yes the type is any, it's user defined
-    {} as Record<string, any>,
+const transformedProps = Object.entries(preview.data.props || {}).reduce(
+  (acc, [key, prop]) => {
+    acc[key] = prop.value;
+    return acc;
+  },
+  // biome-ignore lint:
+  {} as Record<string, any>,
 );
 ---
 
 <Layout>
-    <div class="grid-cols-5 grid gap-4 h-full">
-        <Sidebar />
-        <Playground>
-            <h1 class="text-2xl">{preview.data.title}</h1>
-            <Content {...transformedProps} />
-            {JSON.stringify(preview.data.props)}
-        </Playground>
-        <Inspector componentProps={preview.data.props} />
-    </div>
+  <div class="grid-cols-5 grid gap-4 h-full">
+    <Sidebar />
+    <Playground>
+      <h1 class="text-2xl">{preview.data.title}</h1>
+      <Content {...transformedProps} />
+      {JSON.stringify(preview.data.props)}
+    </Playground>
+    {preview.data.props && <Inspector componentProps={preview.data.props} />}
+  </div>
 </Layout>

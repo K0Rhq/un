@@ -3,9 +3,8 @@ import Inspector from "@/components/playground/Inspector.astro";
 import Playground from "@/components/playground/Playground.astro";
 import Sidebar from "@/components/playground/Sidebar.astro";
 import Layout from "@/layouts/Layout.astro";
-
 import { getCollection, render } from "astro:content";
-import type { CollectionEntry } from "astro:content";
+import { componentProps } from "@/stores/inspector";
 
 export async function getStaticPaths() {
   const previews = await getCollection("previews");
@@ -15,21 +14,10 @@ export async function getStaticPaths() {
   }));
 }
 
-interface Props {
-  preview: CollectionEntry<"previews">;
-}
-
 const { preview } = Astro.props;
 const { Content } = await render(preview);
 
-const transformedProps = Object.entries(preview.data.props || {}).reduce(
-  (acc, [key, prop]) => {
-    acc[key] = prop.value;
-    return acc;
-  },
-  // biome-ignore lint:
-  {} as Record<string, any>,
-);
+componentProps.set(preview.data.props);
 ---
 
 <Layout>
@@ -37,9 +25,42 @@ const transformedProps = Object.entries(preview.data.props || {}).reduce(
     <Sidebar />
     <Playground>
       <h1 class="text-2xl">{preview.data.title}</h1>
-      <Content {...transformedProps} />
-      {JSON.stringify(preview.data.props)}
+      <Content data-playground-content />
+      <p id="props">{JSON.stringify(componentProps.value)}</p>
     </Playground>
-    {preview.data.props && <Inspector componentProps={preview.data.props} />}
+    <Inspector />
   </div>
 </Layout>
+
+<div id="initial-props" data-props={JSON.stringify(preview.data.props)}></div>
+
+<script>
+  import { componentProps } from "@/stores/inspector";
+
+  // Safe element access with null check
+  const initialPropsElement = document.getElementById("initial-props");
+  if (initialPropsElement?.dataset.props) {
+    const initialProps = JSON.parse(initialPropsElement.dataset.props);
+    componentProps.set(initialProps);
+  }
+
+  // Handle subscription for updates
+  componentProps.subscribe((props) => {
+    const propsElement = document.getElementById("props");
+    if (propsElement && props !== undefined) {
+      propsElement.textContent =
+        typeof props === "object"
+          ? JSON.stringify(props, null, 2)
+          : String(props); // Convert to string to ensure it's never undefined
+    }
+  });
+
+  // Update store when page changes
+  document.addEventListener("astro:page-load", () => {
+    const newPropsElement = document.getElementById("initial-props");
+    if (newPropsElement?.dataset.props) {
+      const newProps = JSON.parse(newPropsElement.dataset.props);
+      componentProps.set(newProps);
+    }
+  });
+</script>

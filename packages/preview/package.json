@@ -14,6 +14,6 @@
 		".": "./src/index.ts"
 	},
 	"dependencies": {
-		"astro": "^5.1.5"
+		"astro": "^5.2.2"
 	}
 }

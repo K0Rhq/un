@@ -6,13 +6,12 @@ export const PreviewSchema = z.object({
    */
   title: z.string(),
   directory: z.boolean().optional(),
-  props: z
+  variants: z
     .record(
       z.string(),
       z.object({
-        value: z.any(),
-        type: z.enum(["union", "boolean", "string", "number"]),
-        options: z.array(z.any()).optional(),
+        default: z.any(),
+        options: z.array(z.any()),
       }),
     )
     .optional(),

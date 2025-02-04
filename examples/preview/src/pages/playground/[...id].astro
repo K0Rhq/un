@@ -1,23 +1,62 @@
 ---
+import Layout from "@/layouts/Layout.astro";
+import Sidebar from "@/components/playground/Sidebar.astro";
 import Inspector from "@/components/playground/Inspector.astro";
 import Playground from "@/components/playground/Playground.astro";
-import Sidebar from "@/components/playground/Sidebar.astro";
-import Layout from "@/layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
-import { componentProps } from "@/stores/inspector";
+import type { CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
-  const previews = await getCollection("previews");
+  const previews: CollectionEntry<"previews">[] =
+    await getCollection("previews");
   return previews.map((preview) => ({
     params: { id: preview.id },
     props: { preview },
   }));
 }
 
-const { preview } = Astro.props;
+const { preview } = Astro.props as { preview: CollectionEntry<"previews"> };
 const { Content } = await render(preview);
 
-componentProps.set(preview.data.props);
+const variantConfig = preview.data.variants ?? {};
+const variantKeys = Object.keys(variantConfig);
+
+const optionsArrays: unknown[][] = variantKeys.map(
+  (key) => variantConfig[key]?.options ?? [],
+);
+
+/**
+ * Generic helper to combine arrays into all possible combinations.
+ * @param arrays - an array of arrays, each containing items of type T
+ * @returns an array of arrays, where each inner array is one combination of values
+ */
+function getAllCombinations<T>(arrays: T[][]): T[][] {
+  return arrays.reduce(
+    (combinations, options) =>
+      combinations.flatMap((combo) =>
+        options.map((option) => [...combo, option]),
+      ),
+    [[]] as T[][],
+  );
+}
+
+const combinations = getAllCombinations(optionsArrays);
+
+// Map each combination into an object using the corresponding variant key.
+const allVariants: Record<string, unknown>[] = combinations.map(
+  (optionValues) => {
+    return optionValues.reduce<Record<string, unknown>>(
+      (acc, val, idx) => {
+        const key = variantKeys[idx];
+        acc[key] = val;
+        return acc;
+      },
+      {} as Record<string, unknown>,
+    );
+  },
+);
+
+console.log("All Variants:", allVariants);
 ---
 
 <Layout>
@@ -25,42 +64,15 @@ componentProps.set(preview.data.props);
     <Sidebar />
     <Playground>
       <h1 class="text-2xl">{preview.data.title}</h1>
-      <Content data-playground-content />
-      <p id="props">{JSON.stringify(componentProps.value)}</p>
+      {
+        allVariants.map((variants) => (
+          <div>
+            <p class="text-xs text-neutral-400 my-1">{variants.variant}</p>
+            <Content {...variants} />
+          </div>
+        ))
+      }
     </Playground>
     <Inspector />
   </div>
 </Layout>
-
-<div id="initial-props" data-props={JSON.stringify(preview.data.props)}></div>
-
-<script>
-  import { componentProps } from "@/stores/inspector";
-
-  // Safe element access with null check
-  const initialPropsElement = document.getElementById("initial-props");
-  if (initialPropsElement?.dataset.props) {
-    const initialProps = JSON.parse(initialPropsElement.dataset.props);
-    componentProps.set(initialProps);
-  }
-
-  // Handle subscription for updates
-  componentProps.subscribe((props) => {
-    const propsElement = document.getElementById("props");
-    if (propsElement && props !== undefined) {
-      propsElement.textContent =
-        typeof props === "object"
-          ? JSON.stringify(props, null, 2)
-          : String(props); // Convert to string to ensure it's never undefined
-    }
-  });
-
-  // Update store when page changes
-  document.addEventListener("astro:page-load", () => {
-    const newPropsElement = document.getElementById("initial-props");
-    if (newPropsElement?.dataset.props) {
-      const newProps = JSON.parse(newPropsElement.dataset.props);
-      componentProps.set(newProps);
-    }
-  });
-</script>

@@ -1,7 +1,14 @@
 ---
 title: "Button"
+variants:
+  variant:
+    default: "primary"
+    options:
+      - "primary"
+      - "secondary"
+      - "asd"
 ---
 
 import Button from "@/components/ui/Button.svelte"
 
-<Button variant="primary" client:load>Button</Button>
+<Button {...props} client:load>Button</Button>

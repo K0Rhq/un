@@ -1,26 +1,62 @@
 ---
+import Layout from "@/layouts/Layout.astro";
+import Sidebar from "@/components/playground/Sidebar.astro";
 import Inspector from "@/components/playground/Inspector.astro";
 import Playground from "@/components/playground/Playground.astro";
-import Sidebar from "@/components/playground/Sidebar.astro";
-import Layout from "@/layouts/Layout.astro";
-
 import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
-  const previews = await getCollection("previews");
+  const previews: CollectionEntry<"previews">[] =
+    await getCollection("previews");
   return previews.map((preview) => ({
     params: { id: preview.id },
     props: { preview },
   }));
 }
 
-interface Props {
-  preview: CollectionEntry<"previews">;
+const { preview } = Astro.props as { preview: CollectionEntry<"previews"> };
+const { Content } = await render(preview);
+
+const variantConfig = preview.data.variants ?? {};
+const variantKeys = Object.keys(variantConfig);
+
+const optionsArrays: unknown[][] = variantKeys.map(
+  (key) => variantConfig[key]?.options ?? [],
+);
+
+/**
+ * Generic helper to combine arrays into all possible combinations.
+ * @param arrays - an array of arrays, each containing items of type T
+ * @returns an array of arrays, where each inner array is one combination of values
+ */
+function getAllCombinations<T>(arrays: T[][]): T[][] {
+  return arrays.reduce(
+    (combinations, options) =>
+      combinations.flatMap((combo) =>
+        options.map((option) => [...combo, option]),
+      ),
+    [[]] as T[][],
+  );
 }
 
-const { preview } = Astro.props;
-const { Content } = await render(preview);
+const combinations = getAllCombinations(optionsArrays);
+
+// Map each combination into an object using the corresponding variant key.
+const allVariants: Record<string, unknown>[] = combinations.map(
+  (optionValues) => {
+    return optionValues.reduce<Record<string, unknown>>(
+      (acc, val, idx) => {
+        const key = variantKeys[idx];
+        acc[key] = val;
+        return acc;
+      },
+      {} as Record<string, unknown>,
+    );
+  },
+);
+
+console.log("All Variants:", allVariants);
 ---
 
 <Layout>
@@ -28,7 +64,14 @@ const { Content } = await render(preview);
     <Sidebar />
     <Playground>
       <h1 class="text-2xl">{preview.data.title}</h1>
-      <Content />
+      {
+        allVariants.map((variants) => (
+          <div>
+            <p class="text-xs text-neutral-400 my-1">{variants.variant}</p>
+            <Content {...variants} />
+          </div>
+        ))
+      }
     </Playground>
     <Inspector />
   </div>

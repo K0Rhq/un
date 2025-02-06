@@ -22,7 +22,7 @@ const currentLevelItems = parentId
     if (item.data.directory) {
       return (
         <details open>
-          <summary class="">{item.data.title}</summary>
+          <summary>{item.data.title}</summary>
           <div class="flex flex-col gap-2 pl-6 pt-2">
             <Astro.self items={items} parentId={item.id} />
           </div>
@@ -33,7 +33,7 @@ const currentLevelItems = parentId
       <a
         href={`/playground/${item.id}`}
         class={` ${
-          Astro.url.pathname === `/playground/${item.id}` && "text-blue-400"
+          Astro.url.pathname === `/playground/${item.id}` && "text-orange-400"
         }`}
       >
         {item.data.title}

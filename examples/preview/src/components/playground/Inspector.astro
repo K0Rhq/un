@@ -1,1 +1,79 @@
-<div class="bg-neutral-900 rounded-md p-4 col-span-1 h-full">Inspector</div>
+---
+import { componentProps } from "@/stores/inspector";
+import type { PreviewSchema } from "@korhq/unpreview";
+import type { z } from "astro/zod";
+
+type PreviewType = z.infer<typeof PreviewSchema>;
+type PropValue = NonNullable<PreviewType["props"]>[string];
+---
+
+{
+  componentProps.value && (
+    <div class="bg-neutral-900 flex flex-col gap-4 rounded-md p-4 col-span-1 h-full">
+      <h3 class="text-2xl">Inspector</h3>
+      <form id="inspector-form">
+        {Object.entries(componentProps.value).map(([key, value]) => (
+          <div class="w-full flex justify-between items-center gap-4">
+            <p class="text-neutral-400 font-mono">{key}</p>
+
+            <input
+              name={key}
+              class="text-white text-lg bg-transparent w-full border border-white/10"
+              value={String(value.value)}
+              data-key={key}
+              data-type={value.type}
+            />
+          </div>
+        ))}
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  )
+}
+
+<script>
+  import { componentProps } from "@/stores/inspector";
+  import { PreviewSchema } from "@korhq/unpreview";
+  import type { z } from "astro/zod";
+
+  type PreviewType = z.infer<typeof PreviewSchema>;
+  type Props = NonNullable<PreviewType["props"]>;
+  type PropValue = Props[string];
+
+  const form = document.getElementById("inspector-form") as HTMLFormElement;
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const currentProps = componentProps.get();
+    if (!currentProps) return;
+
+    const formData = new FormData(form);
+    const updatedProps: Props = {};
+
+    // Update each prop based on form data
+    for (const [key, value] of formData.entries()) {
+      const input = form.querySelector<HTMLInputElement>(`[name="${key}"]`);
+      const type = input?.dataset.type as PropValue["type"];
+      let typedValue: any = value;
+
+      // Convert value based on type
+      switch (type) {
+        case "number":
+          typedValue = Number(value);
+          break;
+        case "boolean":
+          typedValue = value === "true";
+          break;
+        // For union and string types, keep as string
+      }
+
+      updatedProps[key] = {
+        ...currentProps[key],
+        value: typedValue,
+      };
+    }
+    console.log(updatedProps);
+    componentProps.set(updatedProps);
+  });
+</script>

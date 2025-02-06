@@ -4,59 +4,22 @@ import Sidebar from "@/components/playground/Sidebar.astro";
 import Inspector from "@/components/playground/Inspector.astro";
 import Playground from "@/components/playground/Playground.astro";
 import { getCollection, render } from "astro:content";
-import type { CollectionEntry } from "astro:content";
+import { generateVariants } from "@korhq/unpreview";
 
 export async function getStaticPaths() {
-  const previews: CollectionEntry<"previews">[] =
-    await getCollection("previews");
+  const previews = await getCollection("previews");
   return previews.map((preview) => ({
     params: { id: preview.id },
     props: { preview },
   }));
 }
 
-const { preview } = Astro.props as { preview: CollectionEntry<"previews"> };
+const { preview } = Astro.props;
 const { Content } = await render(preview);
 
-const variantConfig = preview.data.variants ?? {};
-const variantKeys = Object.keys(variantConfig);
+const allVariants = generateVariants(preview.data.variants ?? {});
 
-const optionsArrays: unknown[][] = variantKeys.map(
-  (key) => variantConfig[key]?.options ?? [],
-);
-
-/**
- * Generic helper to combine arrays into all possible combinations.
- * @param arrays - an array of arrays, each containing items of type T
- * @returns an array of arrays, where each inner array is one combination of values
- */
-function getAllCombinations<T>(arrays: T[][]): T[][] {
-  return arrays.reduce(
-    (combinations, options) =>
-      combinations.flatMap((combo) =>
-        options.map((option) => [...combo, option]),
-      ),
-    [[]] as T[][],
-  );
-}
-
-const combinations = getAllCombinations(optionsArrays);
-
-// Map each combination into an object using the corresponding variant key.
-const allVariants: Record<string, unknown>[] = combinations.map(
-  (optionValues) => {
-    return optionValues.reduce<Record<string, unknown>>(
-      (acc, val, idx) => {
-        const key = variantKeys[idx];
-        acc[key] = val;
-        return acc;
-      },
-      {} as Record<string, unknown>,
-    );
-  },
-);
-
-console.log("All Variants:", allVariants);
+console.log(allVariants);
 ---
 
 <Layout>

@@ -18,8 +18,6 @@ const { preview } = Astro.props;
 const { Content } = await render(preview);
 
 const allVariants = generateVariants(preview.data.variants ?? {});
-
-console.log(allVariants);
 ---
 
 <Layout>

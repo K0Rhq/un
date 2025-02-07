@@ -64,54 +64,8 @@ const previews = defineCollection({
 export const collections = { previews };
 ```
 
-Create some previews MDX files. Learn how to define variants for your components here, if you want to preview multiple component variants via your props.
-
-```src/previews/
-
+Create some preview MDX files. Learn how to define variants for your components above, if you want to preview multiple component variants via your props.
 
 ### Create components
 
-> Recommended directory: `src/components/playground`
-
-Create `SidebarTree.astro`, which uses the `getCurrentLevelItems` function.
-
-```astro
----
-import type { CollectionEntry } from "astro:content";
-import { getCurrentLevelItems } from "@korhq/unpreview";
-
-type PreviewType = CollectionEntry<"previews">;
-interface Props {
-  items: PreviewType[];
-  parentId?: string;
-}
-const { items, parentId } = Astro.props;
-
-const currentLevelItems = getCurrentLevelItems(items, parentId);
----
-
-{
-  currentLevelItems.map((item) => {
-    if (item.data.directory) {
-      return (
-        <details open>
-          <summary>{item.data.title}</summary>
-          <div class="flex flex-col gap-2 pl-6 pt-2">
-            <Astro.self items={items} parentId={item.id} />
-          </div>
-        </details>
-      );
-    }
-    return (
-      <a
-        href={`/playground/${item.id}`}
-        class={` ${
-          Astro.url.pathname === `/playground/${item.id}` && "text-orange-400"
-        }`}
-      >
-        {item.data.title}
-      </a>
-    );
-  })
-}
-```
+Follow the components in [`examples/preview`](https://github.com/K0Rhq/un/tree/main/examples/preview/src) for now.

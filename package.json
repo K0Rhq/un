@@ -6,6 +6,7 @@
     "site": "turbo run --filter=@korhq/unwebsite",
     "cli": "turbo run --filter=un",
     "example:preview": "turbo run --filter=@korhq/unpreview-example",
+    "preview": "turbo run --filter=@korhq/unpreview",
     "fix": "turbo run fix"
   },
   "packageManager": "pnpm@9.12.3",

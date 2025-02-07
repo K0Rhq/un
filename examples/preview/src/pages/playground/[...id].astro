@@ -1,14 +1,16 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Sidebar from "@/components/playground/Sidebar.astro";
-import Inspector from "@/components/playground/Inspector.astro";
 import Playground from "@/components/playground/Playground.astro";
 import { getCollection, render } from "astro:content";
 import { generateVariants } from "@korhq/unpreview";
 
 export async function getStaticPaths() {
   const previews = await getCollection("previews");
-  return previews.map((preview) => ({
+  const filteredPreviews = previews.filter(
+    (preview) => !preview.data.directory,
+  );
+  return filteredPreviews.map((preview) => ({
     params: { id: preview.id },
     props: { preview },
   }));

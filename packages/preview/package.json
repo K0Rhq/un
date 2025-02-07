@@ -15,7 +15,7 @@
     ".": "./src/index.ts"
   },
   "dependencies": {
-    "astro": "^5.2.2"
+    "astro": "^5.2.5"
   },
   "devDependencies": {
     "tsup": "^8.3.6"

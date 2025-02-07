@@ -6,6 +6,7 @@
     "site": "turbo run --filter=@korhq/unwebsite",
     "cli": "turbo run --filter=un",
     "example:preview": "turbo run --filter=@korhq/unpreview-example",
+    "preview": "turbo run --filter=@korhq/unpreview",
     "fix": "turbo run fix"
   },
   "packageManager": "pnpm@9.12.3",
@@ -14,6 +15,6 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "turbo": "^2.3.4"
+    "turbo": "^2.4.0"
   }
 }

@@ -2,6 +2,6 @@
 import { getCollection } from "astro:content";
 
 const items = await getCollection("previews");
-const firstNonDirectory = items.find((item) => !item.data.directory);
-return Astro.redirect(`/playground/${firstNonDirectory.id}`);
+const firstItem = items.find((item) => !item.data.directory);
+return Astro.redirect(`/playground/${firstItem.id}`);
 ---

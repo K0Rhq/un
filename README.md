@@ -28,7 +28,7 @@ pnpm fix # run biome/rustfmt/clippy tasks
 
 Prebuilt, unstyled component files built with Zag, that you can easily drop in. Built with Zag state machines, so it supports any UI framework. Drop into your design package, your app, your monorepo, anywhere.
 
-# unPreview
+# [unPreview](https://github.com/K0Rhq/un/tree/main/packages/preview)
 
 ### v0.1.0-experimental
 

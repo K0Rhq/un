@@ -1,6 +1,6 @@
 {
   "name": "@korhq/unpreview",
-  "version": "0.1.0-experimental.1",
+  "version": "0.1.0-experimental.2",
   "description": "Preview your components and UI docs via previews made in MDX, inside an Astro component playground that you own.",
   "homepage": "https://github.com/K0Rhq/un#readme",
   "type": "module",

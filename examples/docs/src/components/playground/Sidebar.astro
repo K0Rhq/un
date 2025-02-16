@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import SidebarTree from "./SidebarTree.astro";
 
-const previews = await getCollection("previews");
+const previews = await getCollection("docs");
 ---
 
 <div
@@ -11,12 +11,12 @@ const previews = await getCollection("previews");
   <a
     href="/"
     class="text-3xl bg-gradient-to-r from-orange-400 to-red-600 inline-block text-transparent bg-clip-text hover:font-bold transition-all duration-150 ease-out"
-    >unPreview</a
+    >unDocs</a
   >
   <hr class="border-neutral-700" />
   <SidebarTree items={previews} />
   <div class="flex-grow"></div>
   <a href="https://github.com/K0Rhq/un" class="text-xs text-neutral-500"
-    >unPreview v0.1.1-alpha</a
+    >unDocs v0.1.0-alpha</a
   >
 </div>

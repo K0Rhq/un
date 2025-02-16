@@ -1,0 +1,21 @@
+{
+  "name": "@korhq/undocs-example",
+  "type": "module",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "fix": "biome check --write .",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.0.8",
+    "@korhq/undocs": "workspace:*",
+    "@tailwindcss/vite": "^4.0.4",
+    "astro": "^5.2.5",
+    "class-variance-authority": "^0.7.1",
+    "tailwindcss": "^4.0.4",
+    "typescript": "^5.7.3"
+  }
+}

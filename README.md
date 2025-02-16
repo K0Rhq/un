@@ -16,6 +16,7 @@ Build and preview your components & documentation actually with your own design.
 
 ```bash
 pnpm example:preview dev # testing/example environment for unPreview
+pnpm example:docs dev # testing/example environment for unDocs
 pnpm cli dev # the cli
 pnpm site dev # website
 

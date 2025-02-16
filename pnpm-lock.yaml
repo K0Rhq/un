@@ -23,6 +23,30 @@ importers:
         specifier: ^5.2.5
         version: 5.2.5(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.6)(typescript@5.7.3)(yaml@2.7.0)
 
+  examples/docs:
+    dependencies:
+      '@astrojs/mdx':
+        specifier: ^4.0.8
+        version: 4.0.8(astro@5.2.5(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.6)(typescript@5.7.3)(yaml@2.7.0))
+      '@korhq/undocs':
+        specifier: workspace:*
+        version: link:../../packages/docs
+      '@tailwindcss/vite':
+        specifier: ^4.0.4
+        version: 4.0.4(vite@6.1.0(jiti@2.4.2)(lightningcss@1.29.1)(yaml@2.7.0))
+      astro:
+        specifier: ^5.2.5
+        version: 5.2.5(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.6)(typescript@5.7.3)(yaml@2.7.0)
+      class-variance-authority:
+        specifier: ^0.7.1
+        version: 0.7.1
+      tailwindcss:
+        specifier: ^4.0.4
+        version: 4.0.4
+      typescript:
+        specifier: ^5.7.3
+        version: 5.7.3
+
   examples/preview:
     dependencies:
       '@astrojs/mdx':
@@ -85,6 +109,16 @@ importers:
       typescript:
         specifier: ^5.7.3
         version: 5.7.3
+
+  packages/docs:
+    dependencies:
+      astro:
+        specifier: ^5.2.5
+        version: 5.2.5(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.6)(typescript@5.7.3)(yaml@2.7.0)
+    devDependencies:
+      tsup:
+        specifier: ^8.3.6
+        version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
 
   packages/preview:
     dependencies:

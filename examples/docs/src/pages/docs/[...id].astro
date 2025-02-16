@@ -1,0 +1,27 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Sidebar from "@/components/playground/Sidebar.astro";
+import Playground from "@/components/playground/Playground.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const docs = await getCollection("docs");
+  const filteredDocs = docs.filter((doc) => !doc.data.directory);
+  return filteredDocs.map((doc) => ({
+    params: { id: doc.id },
+    props: { doc },
+  }));
+}
+
+const { doc } = Astro.props;
+const { Content } = await render(doc);
+---
+
+<Layout>
+  <div class="grid-cols-5 grid gap-4 h-full">
+    <Sidebar />
+    <Playground>
+      <h1 class="text-2xl">{doc.data.title}</h1>
+    </Playground>
+  </div>
+</Layout>

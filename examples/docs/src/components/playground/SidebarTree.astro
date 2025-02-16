@@ -1,0 +1,38 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCurrentLevelItems } from "@korhq/undocs";
+
+type DocsType = CollectionEntry<"docs">;
+interface Props {
+  items: DocsType[];
+  parentId?: string;
+}
+const { items, parentId } = Astro.props;
+
+const currentLevelItems = getCurrentLevelItems(items, parentId);
+---
+
+{
+  currentLevelItems.map((item) => {
+    if (item.data.directory) {
+      return (
+        <details open>
+          <summary>{item.data.title}</summary>
+          <div class="flex flex-col gap-2 pl-6 pt-2">
+            <Astro.self items={items} parentId={item.id} />
+          </div>
+        </details>
+      );
+    } else
+      return (
+        <a
+          href={`/docs/${item.id}`}
+          class={` ${
+            Astro.url.pathname === `/docs/${item.id}` && "text-orange-400"
+          }`}
+        >
+          {item.data.title}
+        </a>
+      );
+  })
+}

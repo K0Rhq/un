@@ -32,7 +32,7 @@ variants:
       - "another button"
 ---
 
-import Button from "@/components/ui/Button.svelte"
+import Button from "~/components/ui/Button.svelte"
 
 <Button {...props} client:load>{props.text}</Button>
 ```

@@ -1,8 +1,8 @@
 ---
 import Layout from "~/layouts/Layout.astro";
 import Sidebar from "~/components/docs/Sidebar.astro";
+import Prose from "~/components/docs/Prose.astro";
 import { getCollection, render } from "astro:content";
-import type { CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
   const docs = await getCollection("docs");
@@ -22,7 +22,9 @@ const { Content } = await render(doc);
     <div class="col-span-4 flex justify-center h-full w-full">
       <div class="max-w-[512px] w-full border border-white/10 rounded-lg p-4">
         <h1 class="text-2xl">{doc.data.title}</h1>
-        <Content />
+        <Prose>
+          <Content />
+        </Prose>
       </div>
     </div>
   </div>

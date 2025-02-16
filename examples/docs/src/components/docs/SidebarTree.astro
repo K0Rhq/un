@@ -10,6 +10,8 @@ interface Props {
 const { items, parentId } = Astro.props;
 
 const currentLevelItems = getCurrentLevelItems(items, parentId);
+
+console.log("CURRENT LEVEL ITEMS", currentLevelItems);
 ---
 
 {

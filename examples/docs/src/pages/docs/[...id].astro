@@ -6,7 +6,8 @@ import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
   const docs = await getCollection("docs");
-  return docs.map((doc) => ({
+  const filteredDocs = docs.filter((doc) => !doc.data.directory);
+  return filteredDocs.map((doc) => ({
     params: { id: doc.id },
     props: { doc },
   }));

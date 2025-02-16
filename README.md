@@ -30,13 +30,9 @@ Prebuilt, unstyled component files built with Zag, that you can easily drop in. 
 
 # [unPreview](https://github.com/K0Rhq/un/tree/main/packages/preview)
 
-### v0.1.0-experimental
-
 Preview your components and UI docs via previews made in MDX, inside an Astro component playground that you own. Supports any UI framework. Style it with your own brand and layout. Integrate within your current website or docs.
 
-# unDocs
-
-### Conceptual stages
+# [unDocs](https://github.com/K0Rhq/un/tree/main/packages/docs)
 
 Build your docs in an Astro site, using unstyled docs primitives and schemas with all the functionality built in. Style it with your own brand and layout. Integrate within your current website.
 

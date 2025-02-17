@@ -11,14 +11,16 @@ const { filename, langName } = Astro.props;
 >
   <div class="w-full flex justify-between">
     <p class="text-sm font-mono">{(filename && filename) || langName}</p>
-    <button class="text-sm" onclick="copyCode(this)">Copy</button>
+    <button class="text-sm" id="copy-button" onclick="copyCode()">Copy</button>
   </div>
   <div id="codeblock"><slot /></div>
 </div>
+
 <script is:inline>
-  function copyCode(button) {
-    const code = button.parentElement.nextElementSibling.textContent;
+  function copyCode() {
+    const code = document.querySelector("#codeblock>pre.astro-code").innerText;
     navigator.clipboard.writeText(code);
+    const button = document.querySelector("#copy-button");
     button.textContent = "Copied!";
     setTimeout(() => (button.textContent = "Copy"), 1000);
   }

@@ -2,4 +2,8 @@
 title: Goober
 ---
 
-Goober is a silly cat
+# h1
+## h2
+### h3
+
+Goober is the silliest cat

@@ -2,25 +2,30 @@
 import type { HTMLAttributes } from "astro/types";
 import { cva, type VariantProps } from "class-variance-authority";
 
-const aside = cva("flex p-4 flex-col w-full h-fit text-white", {
-  variants: {
-    variant: {
-      note: ["bg-blue-950"],
-      tip: ["bg-green-950"],
-      warning: ["bg-yellow-950"],
-      danger: ["bg-red-950"],
+const aside = cva(
+  "mdx-component flex p-4 flex-col h-fit text-white rounded-lg border border-white/10 mb-1",
+  {
+    variants: {
+      variant: {
+        note: ["bg-blue-950"],
+        tip: ["bg-green-950"],
+        warning: ["bg-yellow-950"],
+        danger: ["bg-red-950"],
+      },
     },
   },
-});
+);
 
 export interface Props
   extends Omit<HTMLAttributes<"div">, "disabled">,
-    VariantProps<typeof aside> {}
+    VariantProps<typeof aside> {
+  title?: string;
+}
 
-const { class: className, variant = "note" } = Astro.props;
+const { class: className, variant = "note", title } = Astro.props;
 ---
 
 <div class={aside({ variant })}>
-  <h3 class="text-xl h-fit leading-none">Note</h3>
+  <h3 class="text-xl w-fit capitalize">{(title && title) || variant}</h3>
   <slot />
 </div>

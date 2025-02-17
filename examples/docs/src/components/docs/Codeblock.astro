@@ -1,0 +1,25 @@
+---
+interface Props {
+  filename?: string;
+  langName: string;
+}
+const { filename, langName } = Astro.props;
+---
+
+<div
+  class="mdx-component flex gap-1 p-4 flex-col h-fit text-white rounded-lg border border-white/10 mb-1 bg-neutral-950"
+>
+  <div class="w-full flex justify-between">
+    <p class="text-sm font-mono">{(filename && filename) || langName}</p>
+    <button class="text-sm" onclick="copyCode(this)">Copy</button>
+  </div>
+  <div id="codeblock"><slot /></div>
+</div>
+<script is:inline>
+  function copyCode(button) {
+    const code = button.parentElement.nextElementSibling.textContent;
+    navigator.clipboard.writeText(code);
+    button.textContent = "Copied!";
+    setTimeout(() => (button.textContent = "Copy"), 1000);
+  }
+</script>

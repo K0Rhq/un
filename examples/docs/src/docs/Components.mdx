@@ -1,0 +1,27 @@
+---
+title: Components
+---
+
+import Aside from "~/components/docs/Aside.astro"
+import Codeblock from "~/components/docs/Codeblock.astro"
+
+These are the components in unDocs.
+
+### Aside
+
+<Aside variant="note">Lorem ipsum</Aside>
+<Aside variant="tip">Lorem ipsum</Aside>
+<Aside variant="warning">Lorem ipsum</Aside>
+<Aside variant="danger">Lorem ipsum</Aside>
+
+<Aside variant="note" title="Custom title!!!">hip hip horray</Aside>
+
+### Codeblock
+
+<Codeblock filename="goober.rs" langName="Rust">
+```rust
+fn main() {
+  println!("goober is probably the silliest kitty in existence");
+}
+```
+</Codeblock>

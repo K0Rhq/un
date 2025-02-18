@@ -26,6 +26,6 @@ const { class: className, variant = "note", title } = Astro.props;
 ---
 
 <div class={aside({ variant })}>
-  <h3 class="text-xl w-fit capitalize">{(title && title) || variant}</h3>
+  <h3 class="text-xl w-fit capitalize">{title || variant}</h3>
   <slot />
 </div>

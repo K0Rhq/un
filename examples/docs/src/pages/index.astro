@@ -1,6 +1,14 @@
 ---
 import Welcome from "~/components/Welcome.astro";
 import Layout from "~/layouts/Layout.astro";
+import Tabs from "~/components/docs/Tabs.astro";
+import TabItem from "~/components/docs/TabItem.astro";
+import Codeblock from "~/components/docs/Codeblock.astro";
 ---
 
-<Layout><Welcome /></Layout>
+<Layout>
+  <Welcome />
+  <Tabs>
+    <TabItem label="asd">asd</TabItem>
+  </Tabs>
+</Layout>

@@ -1,0 +1,60 @@
+<div class="flex flex-col tabs-container">
+  <div class="flex gap-2 bg-neutral-900 p-2">
+    <slot name="tab-buttons" />
+  </div>
+  <div>
+    <slot name="tab-contents" />
+  </div>
+</div>
+<script>
+  // Get all tab containers
+  const tabContainers = document.querySelectorAll(".tabs-container");
+
+  tabContainers.forEach((container) => {
+    const tabButtons = container.querySelectorAll("[data-tab-button]");
+    const tabContents = container.querySelectorAll("[data-tab-content]");
+
+    tabButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const tabId = button.getAttribute("data-tab-button");
+
+        // Update active button - only within this container
+        tabButtons.forEach((btn) => btn.classList.remove("active"));
+        button.classList.add("active");
+
+        // Update active content - only within this container
+        tabContents.forEach((content) => {
+          content.classList.remove("active");
+          if (content.getAttribute("data-tab-content") === tabId) {
+            content.classList.add("active");
+          }
+        });
+      });
+    });
+
+    // Activate first tab by default - for this container only
+    tabButtons[0]?.classList.add("active");
+    tabContents[0]?.classList.add("active");
+  });
+</script>
+
+<style>
+  :global([data-tab-button]) {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+
+  :global([data-tab-button].active) {
+    border-bottom: 2px solid #0f0;
+  }
+
+  :global([data-tab-content]) {
+    display: none;
+  }
+
+  :global([data-tab-content].active) {
+    display: block;
+  }
+</style>

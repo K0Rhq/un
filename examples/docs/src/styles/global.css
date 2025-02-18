@@ -8,9 +8,6 @@
 
 @layer components {
   .untypography {
-    .mdx-component {
-      all: initial;
-    }
     * {
       color: white;
     }

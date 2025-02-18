@@ -15,7 +15,7 @@
     "@korhq/unpreview": "workspace:*",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.0.4",
-    "astro": "^5.2.5",
+    "astro": "^5.3.0",
     "class-variance-authority": "^0.7.1",
     "tailwindcss": "^4.0.4",
     "typescript": "^5.7.3"

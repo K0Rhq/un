@@ -4,6 +4,8 @@ title: Components
 
 import Aside from "~/components/docs/Aside.astro"
 import Codeblock from "~/components/docs/Codeblock.astro"
+import Tabs from '~/components/docs/Tabs.astro';
+import TabItem from '~/components/docs/TabItem.astro';
 
 These are the components in unDocs.
 
@@ -25,3 +27,45 @@ fn main() {
 }
 ```
 </Codeblock>
+
+### Tabs
+
+<Tabs>
+  <button data-tab-button="npm" slot="tab-buttons">
+    npm
+  </button>
+  <button data-tab-button="pnpm" slot="tab-buttons">
+    pnpm
+  </button>
+
+  <div data-tab-content="npm" slot="tab-contents">
+    asdasdsad
+  </div>
+  <div data-tab-content="pnpm" slot="tab-contents">
+    324q3w546ertg
+  </div>
+</Tabs>
+
+### Tabs 2
+
+<Tabs>
+  <button data-tab-button="npm" slot="tab-buttons">
+    npm
+  </button>
+  <button data-tab-button="pnpm" slot="tab-buttons">
+    pnpm
+  </button>
+
+  <div data-tab-content="npm" slot="tab-contents">
+    asdasdsadtwer5erfg
+  </div>
+  <div data-tab-content="pnpm" slot="tab-contents">
+    324q3w546ertg123
+  </div>
+</Tabs>
+
+### Tabs 3
+
+<Tabs>
+  <TabItem label="please work">asdasdd</TabItem>
+</Tabs>

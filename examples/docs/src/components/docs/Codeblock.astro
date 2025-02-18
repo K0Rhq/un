@@ -10,18 +10,43 @@ const { filename, langName } = Astro.props;
   class="mdx-component flex gap-1 p-4 flex-col h-fit text-white rounded-lg border border-white/10 mb-1 bg-neutral-950"
 >
   <div class="w-full flex justify-between">
-    <p class="text-sm font-mono">{(filename && filename) || langName}</p>
-    <button class="text-sm" id="copy-button" onclick="copyCode()">Copy</button>
+    <p class="text-sm font-mono">{filename || langName}</p>
+    <button class="text-sm copy-button">Copy</button>
   </div>
   <div id="codeblock"><slot /></div>
 </div>
 
-<script is:inline>
-  function copyCode() {
-    const code = document.querySelector("#codeblock>pre.astro-code").innerText;
-    navigator.clipboard.writeText(code);
-    const button = document.querySelector("#copy-button");
-    button.textContent = "Copied!";
-    setTimeout(() => (button.textContent = "Copy"), 1000);
-  }
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const copyButtons = document.querySelectorAll(".copy-button");
+
+    copyButtons.forEach((button) => {
+      button.addEventListener("click", async () => {
+        // Find the closest parent div and then find the codeblock within it
+        const container = button.closest(".mdx-component");
+        const codeblock = container?.querySelector("#codeblock");
+
+        if (codeblock) {
+          // Get the text content
+          const text = codeblock.textContent || "";
+
+          try {
+            await navigator.clipboard.writeText(text);
+            // Temporarily change button text to show feedback
+            const originalText = button.textContent;
+            button.textContent = "Copied!";
+            setTimeout(() => {
+              button.textContent = originalText;
+            }, 2000);
+          } catch (err) {
+            console.error("Failed to copy text:", err);
+            button.textContent = "Failed to copy";
+            setTimeout(() => {
+              button.textContent = "Copy";
+            }, 2000);
+          }
+        }
+      });
+    });
+  });
 </script>

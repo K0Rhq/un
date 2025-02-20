@@ -1,0 +1,42 @@
+---
+export interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class:list={[className, "tabs-container"]}>
+  <slot />
+</div>
+
+<script>
+  for (const container of document.querySelectorAll<HTMLDivElement>(
+    ".tabs-container",
+  )) {
+    const tabButtons =
+      container.querySelectorAll<HTMLButtonElement>("[data-tab-button]");
+    const tabContents =
+      container.querySelectorAll<HTMLDivElement>("[data-tab-content]");
+
+    for (const button of tabButtons) {
+      button.addEventListener("click", () => {
+        const tabId = button.getAttribute("data-tab-button");
+        if (!tabId) return;
+
+        for (const btn of tabButtons) btn.classList.remove("active");
+        button.classList.add("active");
+
+        for (const content of tabContents) {
+          content.classList.toggle(
+            "active",
+            content.getAttribute("data-tab-content") === tabId,
+          );
+        }
+      });
+    }
+
+    tabButtons[0]?.classList.add("active");
+    tabContents[0]?.classList.add("active");
+  }
+</script>

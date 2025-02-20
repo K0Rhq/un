@@ -18,10 +18,12 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
-    }
+    },
+    "./astro": "./src/astro.ts"
   },
   "files": [
     "./dist",
+    "./src/components",
     "LICENSE.txt"
   ],
   "dependencies": {

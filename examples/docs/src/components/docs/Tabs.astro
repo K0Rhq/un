@@ -14,19 +14,19 @@ import { Tabs as TabsPrimitive } from "@korhq/undocs/astro";
 <style>
   @reference "~/styles/global.css";
 
-  :global([data-tab-button]) {
+  :global(button[data-tab-id]) {
     @apply px-2 border-b border-transparent;
   }
 
-  :global([data-tab-button].active) {
+  :global(button[data-tab-id].active) {
     @apply border-b border-orange-400;
   }
 
-  :global([data-tab-content]) {
+  :global(div[data-tab-id]) {
     @apply hidden;
   }
 
-  :global([data-tab-content].active) {
+  :global([data-tab-id].active) {
     @apply block;
   }
 </style>

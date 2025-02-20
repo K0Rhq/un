@@ -14,14 +14,15 @@ const { class: className } = Astro.props;
   for (const container of document.querySelectorAll<HTMLDivElement>(
     ".tabs-container",
   )) {
-    const tabButtons =
-      container.querySelectorAll<HTMLButtonElement>("[data-tab-button]");
+    const tabButtons = container.querySelectorAll<HTMLButtonElement>(
+      "button[data-tab-id]",
+    );
     const tabContents =
-      container.querySelectorAll<HTMLDivElement>("[data-tab-content]");
+      container.querySelectorAll<HTMLDivElement>("div[data-tab-id]");
 
     for (const button of tabButtons) {
       button.addEventListener("click", () => {
-        const tabId = button.getAttribute("data-tab-button");
+        const tabId = button.getAttribute("data-tab-id");
         if (!tabId) return;
 
         for (const btn of tabButtons) btn.classList.remove("active");
@@ -30,7 +31,7 @@ const { class: className } = Astro.props;
         for (const content of tabContents) {
           content.classList.toggle(
             "active",
-            content.getAttribute("data-tab-content") === tabId,
+            content.getAttribute("data-tab-id") === tabId,
           );
         }
       });

@@ -1,6 +1,6 @@
 {
   "name": "@korhq/undocs",
-  "version": "0.1.0-alpha",
+  "version": "0.3.0-alpha",
   "description": "Build your docs in an Astro site, using unstyled docs primitives and schemas with all the functionality built in.",
   "homepage": "https://github.com/K0Rhq/un#readme",
   "repository": "https://github.com/K0Rhq/un",

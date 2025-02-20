@@ -1,6 +1,6 @@
 # unDocs
 
-## v0.1.0-alpha
+## v0.3.0-alpha
 
 Build your docs in an Astro site, using unstyled docs primitives and schemas with all the functionality built in. Style it with your own brand and layout. Integrate within your current website.
 

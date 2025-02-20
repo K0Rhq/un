@@ -30,41 +30,43 @@ fn main() {
 ### Tabs
 
 <Tabs>
-  <button data-tab-id="npm" slot="tab-buttons">
-    npm
-  </button>
-  <button data-tab-id="pnpm" slot="tab-buttons">
-    pnpm
-  </button>
-  <button data-tab-id="bun" slot="tab-buttons">
-    bun
-  </button>
-  <button data-tab-id="yarn" slot="tab-buttons">
-    yarn
-  </button>
+  <Fragment slot="tab-buttons">
+    <button data-tab-id="npm">
+      npm
+    </button>
+    <button data-tab-id="pnpm">
+      pnpm
+    </button>
+    <button data-tab-id="bun">
+      bun
+    </button>
+    <button data-tab-id="yarn">
+      yarn
+    </button>
+  </Fragment>
 
-  <div data-tab-id="npm" slot="tab-contents">
+  <div data-tab-id="npm">
     <Codeblock langName="Terminal">
     ```bash
     npx un docs init
     ```
     </Codeblock>
   </div>
-  <div data-tab-id="pnpm" slot="tab-contents">
+  <div data-tab-id="pnpm">
     <Codeblock langName="Terminal">
     ```bash
     pnpm dlx un docs init
     ```
     </Codeblock>
   </div>
-  <div data-tab-id="bun" slot="tab-contents">
+  <div data-tab-id="bun">
     <Codeblock langName="Terminal">
     ```bash
     bunx un docs init
     ```
     </Codeblock>
   </div>
-  <div data-tab-id="yarn" slot="tab-contents">
+  <div data-tab-id="yarn">
     <Codeblock langName="Terminal">
     ```bash
     yarn un docs init
@@ -81,10 +83,10 @@ fn main() {
     Tab 2
   </button>
 
-  <div data-tab-id="1" slot="tab-contents">
+  <div data-tab-id="1">
     Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
   </div>
-  <div data-tab-id="2" slot="tab-contents">
+  <div data-tab-id="2">
     Dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet
   </div>
 </Tabs>

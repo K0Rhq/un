@@ -1,4 +1,6 @@
 ---
+import { Codeblock as CodeblockPrimitive } from "@korhq/undocs/astro";
+
 interface Props {
   filename?: string;
   langName: string;
@@ -6,47 +8,14 @@ interface Props {
 const { filename, langName } = Astro.props;
 ---
 
-<div
-  class="mdx-component flex gap-1 p-4 flex-col h-fit text-white rounded-lg border border-white/10 mb-1 bg-neutral-950"
+<CodeblockPrimitive
+  class="flex gap-1 p-2 flex-col h-fit text-white rounded-lg border border-white/10 mb-1 bg-neutral-950"
 >
   <div class="w-full flex justify-between">
-    <p class="text-sm font-mono">{filename || langName}</p>
-    <button class="text-sm copy-button">Copy</button>
+    <p class="text-xs font-mono">{filename || langName}</p>
+    <button class="text-xs active:text-orange-400" id="undocs-copy-button">
+      Copy
+    </button>
   </div>
   <div id="codeblock"><slot /></div>
-</div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const copyButtons = document.querySelectorAll(".copy-button");
-
-    copyButtons.forEach((button) => {
-      button.addEventListener("click", async () => {
-        // Find the closest parent div and then find the codeblock within it
-        const container = button.closest(".mdx-component");
-        const codeblock = container?.querySelector("#codeblock");
-
-        if (codeblock) {
-          // Get the text content
-          const text = codeblock.textContent || "";
-
-          try {
-            await navigator.clipboard.writeText(text);
-            // Temporarily change button text to show feedback
-            const originalText = button.textContent;
-            button.textContent = "Copied!";
-            setTimeout(() => {
-              button.textContent = originalText;
-            }, 2000);
-          } catch (err) {
-            console.error("Failed to copy text:", err);
-            button.textContent = "Failed to copy";
-            setTimeout(() => {
-              button.textContent = "Copy";
-            }, 2000);
-          }
-        }
-      });
-    });
-  });
-</script>
+</CodeblockPrimitive>

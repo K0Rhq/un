@@ -1,0 +1,36 @@
+---
+export interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class:list={[className, "mdx-component"]}>
+  <slot />
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const copyButtons = document.querySelectorAll("#undocs-copy-button");
+
+    copyButtons.forEach((button) => {
+      button.addEventListener("click", async () => {
+        // Find the closest parent div and then find the codeblock within it
+        const container = button.closest(".mdx-component");
+        const codeblock = container?.querySelector("#codeblock");
+
+        if (codeblock) {
+          // Get the text content
+          const text = codeblock.textContent || "";
+
+          try {
+            await navigator.clipboard.writeText(text);
+          } catch (err) {
+            console.error("Failed to copy text:", err);
+          }
+        }
+      });
+    });
+  });
+</script>

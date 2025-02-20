@@ -36,11 +36,55 @@ fn main() {
   <button data-tab-id="pnpm" slot="tab-buttons">
     pnpm
   </button>
+  <button data-tab-id="bun" slot="tab-buttons">
+    bun
+  </button>
+  <button data-tab-id="yarn" slot="tab-buttons">
+    yarn
+  </button>
 
   <div data-tab-id="npm" slot="tab-contents">
-    asdasdsad
+    <Codeblock langName="Terminal">
+    ```bash
+    npx un docs init
+    ```
+    </Codeblock>
   </div>
   <div data-tab-id="pnpm" slot="tab-contents">
-    324q3w546ertg
+    <Codeblock langName="Terminal">
+    ```bash
+    pnpm dlx un docs init
+    ```
+    </Codeblock>
+  </div>
+  <div data-tab-id="bun" slot="tab-contents">
+    <Codeblock langName="Terminal">
+    ```bash
+    bunx un docs init
+    ```
+    </Codeblock>
+  </div>
+  <div data-tab-id="yarn" slot="tab-contents">
+    <Codeblock langName="Terminal">
+    ```bash
+    yarn un docs init
+    ```
+    </Codeblock>
+  </div>
+</Tabs>
+
+<Tabs>
+  <button data-tab-id="1" slot="tab-buttons">
+    Tab 1
+  </button>
+  <button data-tab-id="2" slot="tab-buttons">
+    Tab 2
+  </button>
+
+  <div data-tab-id="1" slot="tab-contents">
+    Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+  </div>
+  <div data-tab-id="2" slot="tab-contents">
+    Dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet
   </div>
 </Tabs>

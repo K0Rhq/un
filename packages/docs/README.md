@@ -88,12 +88,14 @@ const { filename, langName } = Astro.props;
 And here's the usage of the example component:
 
 ```mdx
+import Codeblock from "~/components/docs/Codeblock.astro";
+
 <Codeblock filename="goober.rs">
   ```rust
   fn main() {
     println!("goober is probably the silliest kitty in existence");
   }
-  ```
+  ``
 </Codeblock>
 ```
 
@@ -145,6 +147,8 @@ import { Tabs as TabsPrimitive } from "@korhq/undocs/astro";
 And here's the usage of the example component:
 
 ```mdx
+import Tabs from '~/components/docs/Tabs.astro';
+
 <Tabs>
   <Fragment slot="tab-buttons">
     <button data-tab-id="1">
@@ -156,7 +160,7 @@ And here's the usage of the example component:
   </Fragment>
 
   <div data-tab-id="1">
-    Lorem ipsum lore
+    Lorem ipsum
   </div>
   <div data-tab-id="2">
     Dolar sit amet

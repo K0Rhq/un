@@ -1,6 +1,6 @@
 # unPreview
 
-## v0.1.1-alpha
+## v0.1.2-alpha
 
 Preview your components and UI docs via previews made in MDX, inside an Astro component playground that you own.
 

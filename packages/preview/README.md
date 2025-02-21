@@ -45,7 +45,7 @@ To get the variants to your component you must define where you want them to go 
 
 Make sure you have an Astro website ready to go, if you haven't made one already.
 
-Install `@korhq/unpreview` with your package manager, from npm. We will support JSR in the future.
+Install `@korhq/unpreview` with your package manager.
 
 ### Create content collection
 

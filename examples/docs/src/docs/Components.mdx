@@ -1,0 +1,92 @@
+---
+title: Components
+---
+
+import Aside from "~/components/docs/Aside.astro"
+import Codeblock from "~/components/docs/Codeblock.astro"
+import Tabs from '~/components/docs/Tabs.astro';
+
+These are the components in unDocs.
+
+### Aside
+
+<Aside variant="note">Lorem ipsum</Aside>
+<Aside variant="tip">Lorem ipsum</Aside>
+<Aside variant="warning">Lorem ipsum</Aside>
+<Aside variant="danger">Lorem ipsum</Aside>
+
+<Aside variant="note" title="Custom title!!!">hip hip horray</Aside>
+
+### Codeblock
+
+<Codeblock filename="goober.rs" langName="Rust">
+```rust
+fn main() {
+  println!("goober is probably the silliest kitty in existence");
+}
+```
+</Codeblock>
+
+### Tabs
+
+<Tabs>
+  <Fragment slot="tab-buttons">
+    <button data-tab-id="npm">
+      npm
+    </button>
+    <button data-tab-id="pnpm">
+      pnpm
+    </button>
+    <button data-tab-id="bun">
+      bun
+    </button>
+    <button data-tab-id="yarn">
+      yarn
+    </button>
+  </Fragment>
+
+  <div data-tab-id="npm">
+    <Codeblock langName="Terminal">
+    ```bash
+    npx un docs init
+    ```
+    </Codeblock>
+  </div>
+  <div data-tab-id="pnpm">
+    <Codeblock langName="Terminal">
+    ```bash
+    pnpm dlx un docs init
+    ```
+    </Codeblock>
+  </div>
+  <div data-tab-id="bun">
+    <Codeblock langName="Terminal">
+    ```bash
+    bunx un docs init
+    ```
+    </Codeblock>
+  </div>
+  <div data-tab-id="yarn">
+    <Codeblock langName="Terminal">
+    ```bash
+    yarn un docs init
+    ```
+    </Codeblock>
+  </div>
+</Tabs>
+
+<Tabs>
+  <button data-tab-id="1" slot="tab-buttons">
+    Tab 1
+  </button>
+  <button data-tab-id="2" slot="tab-buttons">
+    Tab 2
+  </button>
+
+  <div data-tab-id="1">
+    Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+  </div>
+  <div data-tab-id="2">
+    Dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet dolar sit amet
+  </div>
+</Tabs>

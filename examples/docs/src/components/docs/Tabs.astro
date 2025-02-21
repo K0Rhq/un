@@ -1,0 +1,32 @@
+---
+import { Tabs as TabsPrimitive } from "@korhq/undocs/astro";
+---
+
+<TabsPrimitive class="flex flex-col gap-1 mb-1">
+  <div class="flex p-2 pb-0 rounded-xl rounded-b-sm bg-neutral-900">
+    <slot name="tab-buttons" />
+  </div>
+  <div class="bg-neutral-900 p-2 rounded-xl rounded-t-sm">
+    <slot />
+  </div>
+</TabsPrimitive>
+
+<style>
+  @reference "~/styles/global.css";
+
+  :global(button[data-tab-id]) {
+    @apply px-2 border-b border-transparent;
+  }
+
+  :global(button[data-tab-id].active) {
+    @apply border-b border-orange-400;
+  }
+
+  :global(div[data-tab-id]) {
+    @apply hidden;
+  }
+
+  :global(div[data-tab-id].active) {
+    @apply block;
+  }
+</style>

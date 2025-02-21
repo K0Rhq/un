@@ -1,8 +1,9 @@
 {
-  "name": "@korhq/unpreview",
-  "version": "0.1.0-experimental",
-  "description": "Preview your components and UI docs via previews made in MDX, inside an Astro component playground that you own.",
+  "name": "@korhq/undocs",
+  "version": "0.3.0-alpha",
+  "description": "Build your docs in an Astro site, using unstyled docs primitives and schemas with all the functionality built in.",
   "homepage": "https://github.com/K0Rhq/un#readme",
+  "repository": "https://github.com/K0Rhq/un",
   "type": "module",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -14,10 +15,15 @@
   "author": "dukc",
   "license": "Apache-2.0",
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./astro": "./src/astro.ts"
   },
   "files": [
     "./dist",
+    "./src/components",
     "LICENSE.txt"
   ],
   "dependencies": {

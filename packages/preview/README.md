@@ -1,6 +1,6 @@
 # unPreview
 
-## v0.1.0-experimental
+## v0.1.1-alpha
 
 Preview your components and UI docs via previews made in MDX, inside an Astro component playground that you own.
 
@@ -32,7 +32,7 @@ variants:
       - "another button"
 ---
 
-import Button from "@/components/ui/Button.svelte"
+import Button from "~/components/ui/Button.svelte"
 
 <Button {...props} client:load>{props.text}</Button>
 ```
@@ -45,7 +45,7 @@ To get the variants to your component you must define where you want them to go 
 
 Make sure you have an Astro website ready to go, if you haven't made one already.
 
-Install `@korhq/unpreview` with your package manager, from npm. We will support JSR in the future.
+Install `@korhq/unpreview` with your package manager.
 
 ### Create content collection
 

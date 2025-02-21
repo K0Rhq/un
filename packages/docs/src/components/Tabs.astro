@@ -1,0 +1,43 @@
+---
+export interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class:list={[className, "tabs-container mdx-component"]}>
+  <slot />
+</div>
+
+<script>
+  for (const container of document.querySelectorAll<HTMLDivElement>(
+    ".tabs-container",
+  )) {
+    const tabButtons = container.querySelectorAll<HTMLButtonElement>(
+      "button[data-tab-id]",
+    );
+    const tabContents =
+      container.querySelectorAll<HTMLDivElement>("div[data-tab-id]");
+
+    for (const button of tabButtons) {
+      button.addEventListener("click", () => {
+        const tabId = button.getAttribute("data-tab-id");
+        if (!tabId) return;
+
+        for (const btn of tabButtons) btn.classList.remove("active");
+        button.classList.add("active");
+
+        for (const content of tabContents) {
+          content.classList.toggle(
+            "active",
+            content.getAttribute("data-tab-id") === tabId,
+          );
+        }
+      });
+    }
+
+    tabButtons[0]?.classList.add("active");
+    tabContents[0]?.classList.add("active");
+  }
+</script>

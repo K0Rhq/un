@@ -1,0 +1,21 @@
+---
+import { Codeblock as CodeblockPrimitive } from "@korhq/undocs/astro";
+
+interface Props {
+  filename?: string;
+  langName: string;
+}
+const { filename, langName } = Astro.props;
+---
+
+<CodeblockPrimitive
+  class="flex gap-1 p-2 flex-col h-fit text-white rounded-lg border border-white/10 mb-1 bg-neutral-950"
+>
+  <div class="w-full flex justify-between">
+    <p class="text-xs font-mono">{filename || langName}</p>
+    <button class="text-xs active:text-orange-400" id="undocs-copy-button">
+      Copy
+    </button>
+  </div>
+  <div id="codeblock"><slot /></div>
+</CodeblockPrimitive>

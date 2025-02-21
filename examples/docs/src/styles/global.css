@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@layer base {
+  button {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .untypography {
+    * {
+      color: white;
+    }
+    p {
+      font-size: 1rem;
+      line-height: 200%;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+    }
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+    }
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    pre.astro-code {
+      text-wrap: wrap;
+      padding: 0.5rem;
+      border-radius: 0.25rem;
+    }
+  }
+}

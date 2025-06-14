@@ -1,18 +1,23 @@
 ---
 import Layout from "~/layouts/Layout.astro";
 import Sidebar from "~/components/docs/Sidebar.astro";
-import { getCollection, render } from "astro:content";
+import { getCollection, render, type CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
     const docs = await getCollection("docs");
-    const filteredDocs = docs.filter((doc) => !doc.data.directory);
-    return filteredDocs.map((doc) => ({
+    type Docs = CollectionEntry<"docs">;
+    const filteredDocs = docs.filter((doc: Docs) => !doc.data.directory);
+    return filteredDocs.map((doc: Docs) => ({
         params: { id: doc.id },
         props: { doc },
     }));
 }
 
 const docs = await getCollection("docs");
+
+interface Props {
+    doc: CollectionEntry<"docs">;
+}
 const { doc } = Astro.props;
 const { Content } = await render(doc);
 ---

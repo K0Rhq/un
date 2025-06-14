@@ -42,7 +42,10 @@ export default function Playground({ component }: PlaygroundProps) {
 
   if (error) {
     return (
-      <div id="unpreview-error-message" className="text-red-400">
+      <div
+        id="unpreview-error-message"
+        className="text-red-700 dark:text-red-400"
+      >
         {error}
       </div>
     );

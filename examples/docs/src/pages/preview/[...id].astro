@@ -1,18 +1,22 @@
 ---
 import Layout from "~/layouts/Layout.astro";
 import Sidebar from "~/components/docs/Sidebar.astro";
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import Playground from "~/components/playground/Playground";
 
 export async function getStaticPaths() {
     const previews = await getCollection("previews");
-    return previews.map((preview) => ({
+    type Preview = CollectionEntry<"previews">;
+    return previews.map((preview: Preview) => ({
         params: { id: preview.id },
         props: { preview },
     }));
 }
 
 const previews = await getCollection("previews");
+interface Props {
+    preview: CollectionEntry<"previews">;
+}
 const { preview } = Astro.props;
 const { component } = preview.data;
 ---

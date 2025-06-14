@@ -7,6 +7,10 @@ import {
   DialogDescription,
 } from "~/components/ui/Dialog";
 
+export const PreviewProps = {
+  title: "Dialog Test!",
+};
+
 export default function DialogPreview() {
   return (
     <Dialog>

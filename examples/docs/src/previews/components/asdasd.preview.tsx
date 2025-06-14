@@ -1,3 +1,7 @@
+export const PreviewProps = {
+  title: "Preview Test",
+};
+
 export default function Preview() {
   return (
     <div>

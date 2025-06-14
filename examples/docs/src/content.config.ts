@@ -3,11 +3,18 @@ import { DocsSchema } from "@korhq/undocs";
 import { glob } from "astro/loaders";
 import type { Loader } from "astro/loaders";
 import { z } from "astro/zod";
+import type { ComponentType } from "react";
 
 const docs = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx,json}", base: "./src/docs" }),
   schema: DocsSchema,
 });
+
+const PreviewPropsSchema = z
+  .object({
+    title: z.string().optional(),
+  })
+  .passthrough();
 
 // Custom loader for React (.tsx) files and JSON files
 function reactComponentLoader(): Loader {
@@ -24,7 +31,16 @@ function reactComponentLoader(): Loader {
 
       // Get all preview components with direct globbing
       const tsxFiles = import.meta.glob<string>("./previews/**/*.tsx", {
-        as: "url",
+        query: "?url",
+        import: "default",
+      });
+
+      // Also get the modules to extract the PreviewProps
+      const tsxModules = import.meta.glob<{
+        default: ComponentType<Record<string, never>>;
+        PreviewProps?: Record<string, unknown>;
+      }>("./previews/**/*.tsx", {
+        eager: true,
       });
 
       // Process each TSX component
@@ -43,12 +59,34 @@ function reactComponentLoader(): Loader {
 
         const slug = filename.replace(/\.tsx$/, "").replace(/\.preview$/, "");
 
+        // Get PreviewProps from the module if available
+        const module = tsxModules[path];
+        const rawPreviewProps = module?.PreviewProps || {};
+
+        // Validate PreviewProps against schema
+        const previewPropsResult =
+          PreviewPropsSchema.safeParse(rawPreviewProps);
+
+        if (!previewPropsResult.success) {
+          console.error(
+            `Invalid PreviewProps in ${path}:`,
+            previewPropsResult.error,
+          );
+        }
+
+        // Use validated props or empty object
+        const previewProps = previewPropsResult.success
+          ? previewPropsResult.data
+          : {};
+
         // Store the path including directories in the component property
+        // Use PreviewProps.title if available, otherwise use slug
         store.set({
           id,
           data: {
-            title: slug,
+            title: previewProps.title || slug,
             component: relativePath,
+            ...previewProps,
           },
         });
       }
@@ -69,11 +107,12 @@ function reactComponentLoader(): Loader {
         const filename = pathParts.pop() || "";
         // Create an ID that includes the directory structure
         // If the file is index.json, use only the directory name
-        const id = filename === 'index.json'
-          ? pathParts.join("/")
-          : pathParts.length > 0
-            ? `${pathParts.join("/")}/${filename.replace(/\.json$/, "")}`
-            : filename.replace(/\.json$/, "");
+        const id =
+          filename === "index.json"
+            ? pathParts.join("/")
+            : pathParts.length > 0
+              ? `${pathParts.join("/")}/${filename.replace(/\.json$/, "")}`
+              : filename.replace(/\.json$/, "");
 
         const slug = filename.replace(/\.json$/, "");
         const data = jsonFiles[path].default;

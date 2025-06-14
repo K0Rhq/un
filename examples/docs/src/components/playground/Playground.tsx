@@ -1,12 +1,14 @@
-import { lazy, Suspense, useState, useEffect } from "react";
+import { Suspense, useState, useEffect } from "react";
 import type { ComponentType } from "react";
 
-interface DynamicComponentProps {
+interface PlaygroundProps {
   component: string;
 }
 
-export default function DynamicComponent({ component }: DynamicComponentProps) {
-  const [Component, setComponent] = useState<React.ComponentType | null>(null);
+export default function Playground({ component }: PlaygroundProps) {
+  const [Component, setComponent] = useState<ComponentType<
+    Record<string, never>
+  > | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const filename = component;
@@ -28,8 +30,8 @@ export default function DynamicComponent({ component }: DynamicComponentProps) {
 
         setComponent(() => LoadedComponent);
       } catch (err) {
-        console.error("Error loading component:", err);
-        setError(`Failed to load component: ${filename}`);
+        console.error("Error loading preview:", err);
+        setError(`Failed to load preview: ${filename}`);
       }
     }
 
@@ -39,15 +41,19 @@ export default function DynamicComponent({ component }: DynamicComponentProps) {
   }, [filename]);
 
   if (error) {
-    return <div className="error-message">{error}</div>;
+    return (
+      <div id="unpreview-error-message" className="text-red-400">
+        {error}
+      </div>
+    );
   }
 
   if (!Component) {
-    return <div className="loading">Loading component...</div>;
+    return <div id="unpreview-loading">Loading preview...</div>;
   }
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div id="unpreview-loading">Loading...</div>}>
       <Component />
     </Suspense>
   );

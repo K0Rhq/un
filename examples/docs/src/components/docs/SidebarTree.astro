@@ -11,6 +11,7 @@ interface Props {
 const { items, parentId, slugPath } = Astro.props;
 
 const currentLevelItems = getCurrentLevelItems(items, parentId);
+console.log(items);
 ---
 
 {

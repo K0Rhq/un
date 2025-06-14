@@ -4,35 +4,41 @@ import { getCurrentLevelItems } from "@korhq/undocs";
 
 type DocsType = CollectionEntry<"docs">;
 interface Props {
-  items: DocsType[];
-  parentId?: string;
+    items: DocsType[];
+    parentId?: string;
+    slugPath?: string;
 }
-const { items, parentId } = Astro.props;
+const { items, parentId, slugPath } = Astro.props;
 
 const currentLevelItems = getCurrentLevelItems(items, parentId);
 ---
 
 {
-  currentLevelItems.map((item) => {
-    if (item.data.directory) {
-      return (
-        <details open>
-          <summary>{item.data.title}</summary>
-          <div class="flex flex-col gap-2 pl-6 pt-2">
-            <Astro.self items={items} parentId={item.id} />
-          </div>
-        </details>
-      );
-    } else
-      return (
-        <a
-          href={`/docs/${item.id}`}
-          class={` ${
-            Astro.url.pathname === `/docs/${item.id}` && "text-orange-400"
-          }`}
-        >
-          {item.data.title}
-        </a>
-      );
-  })
+    currentLevelItems.map((item) => {
+        if (item.data.directory) {
+            return (
+                <details open>
+                    <summary>{item.data.title}</summary>
+                    <div class="flex flex-col gap-2 pl-6 pt-2">
+                        <Astro.self
+                            items={items}
+                            parentId={item.id}
+                            slugPath={slugPath}
+                        />
+                    </div>
+                </details>
+            );
+        } else
+            return (
+                <a
+                    href={`/${slugPath}/${item.id}`}
+                    class={` ${
+                        Astro.url.pathname === `/${slugPath}/${item.id}` &&
+                        "text-orange-400"
+                    }`}
+                >
+                    {item.data.title}
+                </a>
+            );
+    })
 }

@@ -1,7 +1,0 @@
----
-import { getCollection } from "astro:content";
-
-const items = await getCollection("previews");
-const firstItem = items.find((item) => !item.data.directory);
-return Astro.redirect(`/playground/${firstItem.id}`);
----

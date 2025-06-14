@@ -1,0 +1,34 @@
+---
+import Layout from "~/layouts/Layout.astro";
+import Sidebar from "~/components/docs/Sidebar.astro";
+import { getCollection } from "astro:content";
+import Playground from "~/components/playground/Playground";
+
+export async function getStaticPaths() {
+    const previews = await getCollection("previews");
+    return previews.map((preview) => ({
+        params: { id: preview.id },
+        props: { preview },
+    }));
+}
+
+const previews = await getCollection("previews");
+const { preview } = Astro.props;
+const { component } = preview.data;
+---
+
+<Layout>
+    <div class="grid-cols-5 grid gap-4 h-full">
+        <Sidebar content={previews} slugPath="preview" />
+        <div class="col-span-4 flex justify-center h-full w-full">
+            <div
+                class="max-w-[512px] min-w-0 w-full border border-white/10 rounded-lg p-4"
+            >
+                <h1 class="text-2xl">{preview.data.title}</h1>
+                <div class="untypography">
+                    <Playground component={component} client:load />
+                </div>
+            </div>
+        </div>
+    </div>
+</Layout>

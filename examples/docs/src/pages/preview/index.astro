@@ -1,0 +1,7 @@
+---
+import { getCollection } from "astro:content";
+
+const items = await getCollection("previews");
+console.log("previews", items);
+return Astro.redirect(`/preview/${items[0].id}`);
+---

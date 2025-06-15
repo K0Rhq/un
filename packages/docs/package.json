@@ -1,6 +1,6 @@
 {
   "name": "@korhq/undocs",
-  "version": "0.4.0-alpha",
+  "version": "0.4.1-alpha",
   "description": "A documentation framework built with Astro where you can build your own docs and component playground where you control the layout, components, and design.",
   "homepage": "https://github.com/K0Rhq/un#readme",
   "repository": "https://github.com/K0Rhq/un",

@@ -4,7 +4,7 @@
 
 ### `v0.4.0-alpha`
 
-A documenation framework built with Astro where you can build your own docs and component playground where you control the layout, components, and design.
+A documentation framework built with Astro where you can build your own docs and component playground where you control the layout, components, and design.
 
 ## Codebase
 
@@ -35,17 +35,17 @@ Our documentation will be in this README for now, once we have a website we will
 
 With unDocs & unPreview, you make the components, pages, and playground yourself. The package provides component primitives, helper functions and schemas to help you with that. This is so you can control the design and layout of everything.
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > unPreview is the term for the playground, where `previews` are kind of like stories.
 >
 > unPreview only supports React right now. Soon we will support Svelte and Vue.
 
-> [!TIP]  
+> [!TIP]
 > unPreview is kinda the highlight right now. If you would like to use unDocs, I would wait, because we still need to add critical features like a Site Search. Any contributions would mean a lot!
 
 ### Getting Started
 
-1. Initate an Astro project, ex. `pnpm create astro@latest`
+1. Create an Astro project, ex. `pnpm create astro@latest`
 2. Install the UI framework you're using (unPreview only supports React), ex. `pnpm astro add react`
 2. Install the Astro MDX integration, ex. `pnpm astro add mdx`
 3. Install `@korhq/undocs` with your package manager.
@@ -468,7 +468,7 @@ export default function Playground({ component, variants }: PlaygroundProps) {
 ```
 #### `src/components/playground/Inspector.tsx`
 
-This grabs any variants from the store, and loads them into select boxes. It is reccomended to use the default HTML select boxes.
+This grabs any variants from the store, and loads them into select boxes. It is recommended to use the default HTML select boxes.
 
 ```tsx
 import type React from "react";
@@ -659,7 +659,7 @@ Define your variants in `PreviewProps`, then take them in the `Preview` componen
 | value      | description      | type |
 | ------------- | ------------- | ----------- |
 | title | The name of the variant, all lowercase. | string |
-| options | The avaiable options for that variant | string[] / number[] / boolean[] |
+| options | The available options for that variant | string[] / number[] / boolean[] |
 | default | The default option selected (must be one of the options defined above) | string / number / boolean |
 
 ```ts
@@ -708,4 +708,4 @@ Now the variants should appear in the inspector and you should be able to edit t
 
 ## Overview
 
-What you've just created is custom documenation and a custom UI component playground, and you created all the components for the layout yourself. You can now customize this however you want, integrating your design system. 
+What you've just created is custom documentation and a custom UI component playground, and you created all the components for the layout yourself. You can now customize this however you want, integrating your design system.

@@ -1,17 +1,28 @@
 import { Suspense, useState, useEffect } from "react";
 import type { ComponentType } from "react";
+import { useVariantsStore } from "@korhq/undocs";
+import type { VariantOption } from "@korhq/undocs";
 
 interface PlaygroundProps {
   component: string;
+  variants?: VariantOption[];
 }
 
-export default function Playground({ component }: PlaygroundProps) {
+export default function Playground({ component, variants }: PlaygroundProps) {
   const [Component, setComponent] = useState<ComponentType<
-    Record<string, never>
+    Record<string, unknown>
   > | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const selectedVariants = useVariantsStore((state) => state.selectedVariants);
 
   const filename = component;
+
+  // Initialize variants when component mounts or variants change
+  useEffect(() => {
+    if (variants) {
+      useVariantsStore.getState().setVariants(variants);
+    }
+  }, [variants]);
 
   useEffect(() => {
     async function loadComponent() {
@@ -21,7 +32,9 @@ export default function Playground({ component }: PlaygroundProps) {
         setError(null);
 
         // Dynamically import the component
-        const importedModule = await import(`../../previews/${filename}`);
+        const importedModule = await import(
+          /* @vite-ignore */ `../../previews/${filename}`
+        );
         const LoadedComponent = importedModule.default;
 
         if (!LoadedComponent) {
@@ -42,10 +55,7 @@ export default function Playground({ component }: PlaygroundProps) {
 
   if (error) {
     return (
-      <div
-        id="unpreview-error-message"
-        className="text-red-700 dark:text-red-400"
-      >
+      <div id="unpreview-error" className="text-red-400">
         {error}
       </div>
     );
@@ -57,7 +67,7 @@ export default function Playground({ component }: PlaygroundProps) {
 
   return (
     <Suspense fallback={<div id="unpreview-loading">Loading...</div>}>
-      <Component />
+      <Component {...selectedVariants} />
     </Suspense>
   );
 }

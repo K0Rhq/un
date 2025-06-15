@@ -19,7 +19,7 @@ export const PreviewProps = {
 export default function Preview({ ...props }) {
   return (
     <div>
-      <Button variant={props.variant}>asdasd</Button>
+      <Button {...props}>asdasd</Button>
     </div>
   );
 }

@@ -9,14 +9,21 @@ import {
 
 export const PreviewProps = {
   title: "Dialog Test!",
+  variants: [
+    {
+      title: "test",
+      options: ["1", "2", "three"],
+      default: "2",
+    },
+  ],
 };
 
-export default function DialogPreview() {
+export default function DialogPreview({ ...props }) {
   return (
     <Dialog>
       <DialogTrigger>
         <button type="button" className="bg-green-300 text-black p-3">
-          Open Dialog
+          Open Dialog {props.test}
         </button>
       </DialogTrigger>
       <DialogContent>

@@ -11,11 +11,10 @@ interface Props {
 const { items, parentId, slugPath } = Astro.props;
 
 const currentLevelItems = getCurrentLevelItems(items, parentId);
-console.log(items);
 ---
 
 {
-    currentLevelItems.map((item) => {
+    currentLevelItems.map((item: DocsType) => {
         if (item.data.directory) {
             return (
                 <details open>

@@ -4,7 +4,10 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"]
-    }
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "module": "ES2022"
   },
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"]

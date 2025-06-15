@@ -1,7 +1,7 @@
 {
   "name": "@korhq/undocs",
-  "version": "0.3.0-alpha",
-  "description": "Build your docs in an Astro site, using unstyled docs primitives and schemas with all the functionality built in.",
+  "version": "0.4.0-alpha",
+  "description": "A documentation framework built with Astro where you can build your own docs and component playground where you control the layout, components, and design.",
   "homepage": "https://github.com/K0Rhq/un#readme",
   "repository": "https://github.com/K0Rhq/un",
   "type": "module",
@@ -19,7 +19,8 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./astro": "./src/astro.ts"
+    "./astro": "./src/astro.ts",
+    "./variants": "./src/variants.ts"
   },
   "files": [
     "./dist",
@@ -27,9 +28,14 @@
     "LICENSE.txt"
   ],
   "dependencies": {
-    "astro": "^5.2.5"
+    "@types/react": "^19.1.8",
+    "astro": "^5.9.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "zustand": "^4.5.7"
   },
   "devDependencies": {
-    "tsup": "^8.3.6"
+    "tsup": "^8.5.0",
+    "vite": "^5.4.19"
   }
 }

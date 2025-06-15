@@ -7,9 +7,10 @@
     "check-types": {
       "dependsOn": ["^check-types"]
     },
-    "dev": {
+    "@korhq/undocs-example#dev": {
       "persistent": true,
-      "cache": false
+      "cache": false,
+      "dependsOn": ["@korhq/undocs#build"]
     },
     "fix": {
       "outputs": []

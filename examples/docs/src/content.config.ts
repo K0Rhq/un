@@ -1,5 +1,5 @@
 import { defineCollection } from "astro:content";
-import { DocsSchema, reactComponentLoader } from "@korhq/undocs";
+import { DocsSchema, reactPreviewLoader } from "@korhq/undocs";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 import { VariantsSchema } from "@korhq/undocs";
@@ -10,6 +10,7 @@ const docs = defineCollection({
 });
 
 const previews = defineCollection({
+  loader: reactPreviewLoader({ previewsDir: "src/previews" }),
   schema: z
     .object({
       title: z.string().optional(),
@@ -18,7 +19,6 @@ const previews = defineCollection({
       variants: VariantsSchema.optional(),
     })
     .passthrough(),
-  loader: reactComponentLoader({ previewsDir: "src/previews" }),
 });
 
 export const collections = { docs, previews };
